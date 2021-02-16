@@ -1,3 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
 <h2>ND nr.1</h2>
 
 <?php
@@ -152,6 +164,7 @@ for ($i = 0; $i < 30; $i++) {
     $element5['user_id'] = $randomId;
     $element5['place_in_row'] = $randPlace;
     array_push($array5, $element5);
+    // $array5[$i] = ['user_id' => rand(1, 1000000), 'place_in_row' => rand(0, 100)];
 }
 echo '<pre>';
 print_r($array5);
@@ -161,3 +174,120 @@ echo '</pre>';
 <h2>ND nr.6</h2>
 
 <?php
+
+echo 'Išrūšiuokite 5 uždavinio masyvą pagal user_id didėjančia tvarka.';
+echo '<br><br>';
+$array6ById = $array5;
+$userId = array_column($array6ById, 'user_id');
+array_multisort($userId, SORT_ASC, $array6ById);
+echo '<pre>';
+print_r($array6ById);
+echo '</pre>';
+echo 'Išrūšiuokite 5 uždavinio masyvą pagal place_in_row mažėjančia tvarka.';
+echo '<br><br>';
+$array6ByPlace = $array5;
+$place = array_column($array6ByPlace, 'place_in_row');
+array_multisort($place, SORT_DESC, $array6ByPlace);
+echo '<pre>';
+print_r($array6ByPlace);
+echo '</pre>';
+?>
+
+<h2>ND nr.7</h2>
+
+<?php
+
+echo 'Prie 6 uždavinio masyvo antro lygio masyvų pridėkite dar du elementus: name ir surname. Elementus užpildykite stringais iš atsitiktinai sugeneruotų lotyniškų raidžių, kurių ilgiai nuo 5 iki 15.';
+echo '<br><br>';
+$array7 = $array5;
+for ($i = 0; $i < 30; $i++) {
+    $name = '';
+    $strLenName = rand(5, 15);
+    while (strlen($name) < $strLenName) {
+        $name .= chr(rand(65, 90));
+    }
+    $surname = '';
+    $strLenSurname = rand(5, 15);
+    while (strlen($surname) < $strLenSurname) {
+        $surname .= chr(rand(65, 90));
+    }
+    $array7[$i] += ['name' => $name, 'surname' => $surname];
+}
+echo '<pre>';
+print_r($array7);
+echo '</pre>';
+?>
+
+<h2>ND nr.8</h2>
+
+<?php
+
+echo 'Sukurkite masyvą iš 10 elementų. Masyvo reikšmes užpildykite pagal taisyklę: generuokite skaičių nuo 0 iki 5. Ir sukurkite tokio ilgio masyvą. Jeigu reikšmė yra 0 masyvo nekurkite. Antro lygio masyvo reikšmes užpildykite atsitiktiniais skaičiais nuo 0 iki 10. Ten kur masyvo nekūrėte reikšmę nuo 0 iki 10 įrašykite tiesiogiai.';
+echo '<br><br>';
+$array8 = [];
+for ($i = 0; $i < 10; $i++) {
+    $randomNumb = rand(0, 5);
+    echo $randomNumb . ' ';
+    if ($randomNumb === 0) {
+        $array8[$i] = rand(0, 10);
+    } else {
+        $element8 = [];
+        for ($j = 0; $j < $randomNumb; $j++) {
+            $element8[$j] = rand(0, 10);
+        }
+        array_push($array8, $element8);
+    }
+}
+echo '<pre>';
+print_r($array8);
+echo '</pre>';
+?>
+
+<h2>ND nr.9</h2>
+
+<?php
+
+echo 'Paskaičiuokite 8 uždavinio masyvo visų reikšmių sumą ir išrūšiuokite masyvą taip, kad pirmiausiai eitų mažiausios masyvo reikšmės arba jeigu reikšmė yra masyvas, to masyvo reikšmių sumos.';
+echo '<br><br>';
+$sum9 = 0;
+for ($i = 0; $i < count($array8); $i++) {
+    if (is_array($array8[$i])) {
+        $sum9 += array_sum($array8[$i]);
+    } else {
+        $sum9 += $array8[$i];
+    }
+}
+echo $sum9;
+?>
+
+<h2>ND nr.10</h2>
+
+<?php
+
+echo 'Sukurkite masyvą iš 10 elementų. Jo reikšmės masyvai iš 10 elementų. Antro lygio masyvų reikšmės masyvai su dviem elementais value ir color. Reikšmė value vienas iš atsitiktinai parinktų simbolių: #%+*@裡, o reikšmė color atsitiktinai sugeneruota spalva formatu: #XXXXXX. Pasinaudoję masyvu atspausdinkite “kvadratą” kurį sudarytų masyvo reikšmės nuspalvintos spalva color.';
+echo '<br><br>';
+$array10 = [];
+$value10A = '#%+*@裡';
+for ($i = 0; $i < 10; $i++) {
+    $element10 = [];
+    for ($j = 0; $j < 10; $j++) {
+        $value10 = $value10A[rand(0, mb_strlen($value10A))];
+        $color10 = '#' . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
+        $element10[$j] = ['value' => $value10, 'color' => $color10];
+    }
+    $array10[$i] = $element10;
+}
+echo '<pre>';
+print_r($array10);
+echo '</pre>';
+for ($i = 0; $i < count($array10); $i++) {
+    for ($j = 0; $j < count($array10[$i]); $j++) {
+        print_r('<div style="display: inline-block; width: 20px; color: '.$array10[$i][$j]['color'].'";>'.$array10[$i][$j]['value'].'</div>');
+    }
+    echo '<br>';
+}
+echo '<br><br>';
+?>
+
+</body>
+</html>
