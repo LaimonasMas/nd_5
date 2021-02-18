@@ -127,10 +127,13 @@
         }
         array_push($array3, $element3);
     }
-    for ($i = 0; $i < 10; $i++) {
-        for ($j = 0; $j < count($array3[$i]); $j++) {
-            asort($array3[$i]);
-        }
+    // for ($i = 0; $i < 10; $i++) {
+    //     for ($j = 0; $j < count($array3[$i]); $j++) {
+    //         asort($array3[$i]);
+    //     }
+    // }
+    foreach ($array3 as &$value) {
+        sort($value);
     }
     echo '<pre>';
     print_r($array3);
@@ -277,6 +280,9 @@
         return $a <=> $b;
     });
     _d($array9);
+    echo '<pre>';
+    print_r($array9);
+    echo '</pre>';
 
     ?>
 
@@ -308,6 +314,56 @@
     }
     echo '<br><br>';
     ?>
+
+<h2>ND nr.11</h2>
+
+<?php
+
+echo 'Duotas kodas, generuojantis masyvą:';
+echo '<br><br>';
+
+do {
+    $a = rand(0, 1000);
+    $b = rand(0, 1000);
+} while ($a == $b);
+$long = rand(10,30);
+$sk1 = $sk2 = 0;
+echo '<h3>Skaičiai '.$a.' ir '.$b.'</h3>';
+$c = [];
+for ($i=0; $i<$long; $i++) {
+    $c[] = array_rand(array_flip([$a, $b]));
+}
+echo '<h4>Masyvas:</h4>';
+echo '<pre>';
+print_r($c);
+echo '</pre>';
+// $sum = 0;
+// foreach ($c as $key => $value) {
+//     $sum += $value;
+// }
+// echo '<br><br>';
+$vidurinis = ($a + $b) / 2;
+$c[] = $vidurinis;
+sort($c);
+echo '<pre>';
+print_r($c);
+echo '</pre>';
+echo '<br><br>';
+echo max($a, $b);
+echo '<br><br>';
+
+$key = array_search($vidurinis, $c);
+// echo $key;
+// echo '<br><br>';
+$sk1 = $key;
+$sk2 = count($c) - 1 - $key;
+echo 'Atsakymas:';
+echo '<br><br>';
+echo '<h3>Skaičius '.$a.' yra pakartotas '.$sk1.' kartų, o skaičius '.$b.' - '.$sk2.' kartų.</h3>';
+
+
+
+?>
 
 </body>
 
