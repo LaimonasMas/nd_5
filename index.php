@@ -337,11 +337,8 @@ echo '<h4>Masyvas:</h4>';
 echo '<pre>';
 print_r($c);
 echo '</pre>';
-// $sum = 0;
-// foreach ($c as $key => $value) {
-//     $sum += $value;
-// }
-// echo '<br><br>';
+
+// sprendimas
 $vidurinis = ($a + $b) / 2;
 $c[] = $vidurinis;
 sort($c);
@@ -349,20 +346,15 @@ echo '<pre>';
 print_r($c);
 echo '</pre>';
 echo '<br><br>';
-echo max($a, $b);
-echo '<br><br>';
-
+$sumab = $a + $b;
+$b = max($a, $b);
+$a = $sumab - $b;
 $key = array_search($vidurinis, $c);
-// echo $key;
-// echo '<br><br>';
 $sk1 = $key;
 $sk2 = count($c) - 1 - $key;
 echo 'Atsakymas:';
-echo '<br><br>';
+echo '<br>';
 echo '<h3>Skaičius '.$a.' yra pakartotas '.$sk1.' kartų, o skaičius '.$b.' - '.$sk2.' kartų.</h3>';
-
-
-
 ?>
 
 </body>
