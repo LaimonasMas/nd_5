@@ -345,7 +345,6 @@ sort($c);
 echo '<pre>';
 print_r($c);
 echo '</pre>';
-echo '<br><br>';
 $sumab = $a + $b;
 $b = max($a, $b);
 $a = $sumab - $b;
