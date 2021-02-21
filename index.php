@@ -160,21 +160,22 @@
 
     echo 'Sukurkite masyvą iš 30 elementų. Kiekvienas masyvo elementas yra masyvas [user_id => xxx, place_in_row => xxx] user_id atsitiktinis unikalus skaičius nuo 1 iki 1000000, place_in_row atsitiktinis skaičius nuo 0 iki 100.';
     echo '<br><br>';
-
     $array5 = [];
     for ($i = 0; $i < 30; $i++) {
-        $element5 = [];
-        $randomId = rand(1, 1000000);
-        $randPlace = rand(0, 100);
-        $element5['user_id'] = $randomId;
-        $element5['place_in_row'] = $randPlace;
-        array_push($array5, $element5);
-        // $array5[$i] = ['user_id' => rand(1, 1000000), 'place_in_row' => rand(0, 100)];
+        while (count($array5) <= $i) {            
+            $randomId = rand(1, 1000000);
+            $randPlace = rand(0, 100);
+            if (!in_array($randPlace, array_column($array5, 'place_in_row'))) {
+            $array5[$i] = ['user_id' => $randomId, 'place_in_row' => $randPlace];
+            }
+        }
     }
     echo '<pre>';
     print_r($array5);
     _d($array5);
     echo '</pre>';
+    _dc(array_column($array5, 'place_in_row'));
+
     ?>
 
     <h2>ND nr.6</h2>
@@ -315,46 +316,46 @@
     echo '<br><br>';
     ?>
 
-<h2>ND nr.11</h2>
+    <h2>ND nr.11</h2>
 
-<?php
+    <?php
 
-echo 'Duotas kodas, generuojantis masyvą:';
-echo '<br><br>';
+    echo 'Duotas kodas, generuojantis masyvą:';
+    echo '<br><br>';
 
-do {
-    $a = rand(0, 1000);
-    $b = rand(0, 1000);
-} while ($a == $b);
-$long = rand(10,30);
-$sk1 = $sk2 = 0;
-echo '<h3>Skaičiai '.$a.' ir '.$b.'</h3>';
-$c = [];
-for ($i=0; $i<$long; $i++) {
-    $c[] = array_rand(array_flip([$a, $b]));
-}
-echo '<h4>Masyvas:</h4>';
-echo '<pre>';
-print_r($c);
-echo '</pre>';
+    do {
+        $a = rand(0, 1000);
+        $b = rand(0, 1000);
+    } while ($a == $b);
+    $long = rand(10, 30);
+    $sk1 = $sk2 = 0;
+    echo '<h3>Skaičiai ' . $a . ' ir ' . $b . '</h3>';
+    $c = [];
+    for ($i = 0; $i < $long; $i++) {
+        $c[] = array_rand(array_flip([$a, $b]));
+    }
+    echo '<h4>Masyvas:</h4>';
+    echo '<pre>';
+    print_r($c);
+    echo '</pre>';
 
-// sprendimas
-$vidurinis = ($a + $b) / 2;
-$c[] = $vidurinis;
-sort($c);
-echo '<pre>';
-print_r($c);
-echo '</pre>';
-$sumab = $a + $b;
-$b = max($a, $b);
-$a = $sumab - $b;
-$key = array_search($vidurinis, $c);
-$sk1 = $key;
-$sk2 = count($c) - 1 - $key;
-echo 'Atsakymas:';
-echo '<br>';
-echo '<h3>Skaičius '.$a.' yra pakartotas '.$sk1.' kartų, o skaičius '.$b.' - '.$sk2.' kartų.</h3>';
-?>
+    // sprendimas
+    $vidurinis = ($a + $b) / 2;
+    $c[] = $vidurinis;
+    sort($c);
+    echo '<pre>';
+    print_r($c);
+    echo '</pre>';
+    $sumab = $a + $b;
+    $b = max($a, $b);
+    $a = $sumab - $b;
+    $key = array_search($vidurinis, $c);
+    $sk1 = $key;
+    $sk2 = count($c) - 1 - $key;
+    echo 'Atsakymas:';
+    echo '<br>';
+    echo '<h3>Skaičius ' . $a . ' yra pakartotas ' . $sk1 . ' kartų, o skaičius ' . $b . ' - ' . $sk2 . ' kartų.</h3>';
+    ?>
 
 </body>
 
