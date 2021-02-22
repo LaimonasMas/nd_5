@@ -25,9 +25,16 @@
         }
         array_push($array, $element);
     }
+    // $dviMatisMasyvas = [];
+    // foreach (range(1, 10) as $keyD => $value) {
+    //     foreach (range(1, 5) as $keyM => $value2) {
+    //         $dviMatisMasyvas[$keyD][$keyM] = rand(5, 25);
+    //     }
+    // }
 
     echo '<pre>';
     print_r($array);
+    // print_r($dviMatisMasyvas);
     echo '</pre>';
     ?>
 
@@ -95,16 +102,7 @@
     echo '<br><br>';
     $array2E = [];
     for ($i = 0; $i < 10; $i++) {
-        ($i === 0) ? array_push($array2E, array_sum($array2D[$i])) : '';
-        ($i === 1) ? array_push($array2E, array_sum($array2D[$i])) : '';
-        ($i === 2) ? array_push($array2E, array_sum($array2D[$i])) : '';
-        ($i === 3) ? array_push($array2E, array_sum($array2D[$i])) : '';
-        ($i === 4) ? array_push($array2E, array_sum($array2D[$i])) : '';
-        ($i === 5) ? array_push($array2E, array_sum($array2D[$i])) : '';
-        ($i === 6) ? array_push($array2E, array_sum($array2D[$i])) : '';
-        ($i === 7) ? array_push($array2E, array_sum($array2D[$i])) : '';
-        ($i === 8) ? array_push($array2E, array_sum($array2D[$i])) : '';
-        ($i === 9) ? array_push($array2E, array_sum($array2D[$i])) : '';
+        $array2E[$i] = array_sum($array2D[$i]);
     }
     echo '<pre>';
     print_r($array2E);
@@ -120,25 +118,15 @@
     $array3 = [];
     for ($i = 0; $i < 10; $i++) {
         $random = rand(2, 20);
-        $element3 = [];
         for ($j = 0; $j < $random; $j++) {
             $value = chr(rand(65, 90));
-            array_push($element3, $value);
+            $array3[$i][$j] = $value;
         }
-        array_push($array3, $element3);
-    }
-    // for ($i = 0; $i < 10; $i++) {
-    //     for ($j = 0; $j < count($array3[$i]); $j++) {
-    //         asort($array3[$i]);
-    //     }
-    // }
-    foreach ($array3 as &$value) {
-        sort($value);
+        sort($array3[$i]);
     }
     echo '<pre>';
     print_r($array3);
     echo '</pre>';
-
     ?>
 
     <h2>ND nr.4</h2>
@@ -299,7 +287,7 @@
         $element10 = [];
         for ($j = 0; $j < 10; $j++) {
             $value10 = $value10A[rand(0, mb_strlen($value10A))];
-            $color10 = '#' . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
+            $color10 = '#' . substr(md5(rand()), 0, 6);
             $element10[$j] = ['value' => $value10, 'color' => $color10];
         }
         $array10[$i] = $element10;
